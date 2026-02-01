@@ -8,6 +8,8 @@
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body {
+            <div id="photo-blur-bg"></div>
+    <div id="photo-bg"></div>
             background: linear-gradient(-45deg, #0d1117, #1a1a2e, #2d0b16, #0d1117);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
@@ -29,15 +31,30 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* This is the magic line for the fit */
             background-image: url('./us.jpg') !important;
-            background-size: cover; /* Ensures the photo fills the screen */
-            background-position: center center; /* Keeps the middle of the photo visible */
+            /* Shows the FULL selfie without cropping anything */
+            background-size: contain; 
+            background-position: center;
             background-repeat: no-repeat;
             opacity: 0;
             transition: opacity 2s ease;
+            z-index: 2;
+            filter: brightness(0.8); /* Keep it bright since it's a selfie! */
+        }
+
+        /* Adds a blurry background so the edges look nice on any phone */
+        #photo-blur-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('./us.jpg') !important;
+            background-size: cover;
+            filter: blur(20px) brightness(0.3);
             z-index: 1;
-            filter: brightness(0.4) contrast(1.1); /* Slightly more contrast for a premium look */
+            opacity: 0;
+            transition: opacity 2s ease;
         }
 
         .card {
@@ -156,8 +173,11 @@
             btn.style.top = newY + 'px';
         }
 
-        function boom() {
+      function boom() {
+            // Reveal both photo layers
             document.getElementById('photo-bg').style.opacity = '1';
+            document.getElementById('photo-blur-bg').style.opacity = '1';
+            
             document.getElementById('no-btn').style.display = 'none';
             showStage(5);
             for (let i = 0; i < 100; i++) {
@@ -169,6 +189,7 @@
                 confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
                 document.body.appendChild(confetti);
             }
+        }
         }
     </script>
 </body>
