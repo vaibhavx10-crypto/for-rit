@@ -31,16 +31,23 @@
         }
 
         /* The Selfie Layer - Sharp and Uncropped */
-        #photo-bg {
+      #photo-bg {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
             background-image: url('./us.jpg') !important;
-            background-size: contain; /* Shows the WHOLE photo */
-            background-position: center;
+            /* This stretches the photo to fill the entire screen */
+            background-size: cover; 
+            /* This ensures the middle of your selfie stays visible */
+            background-position: center center; 
             background-repeat: no-repeat;
             opacity: 0;
             transition: opacity 2s ease;
             z-index: 1;
+            /* Darkens slightly so the 'Love you' text stands out */
+            filter: brightness(0.5); 
         }
 
         .card {
