@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Top Secret: For RiT 🤫</title>
+    <title>For RiT ❤️</title>
     <style>
+        /* [Keeping your existing aesthetic styles] */
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body {
-            background-color: #0d1117;
+            background: linear-gradient(-45deg, #0d1117, #1a1a2e, #2d0b16, #0d1117);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             color: #ffffff;
-            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -21,111 +24,86 @@
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.08);
             padding: 40px 25px;
             border-radius: 30px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             width: 100%;
             max-width: 350px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
             z-index: 10;
+            position: relative;
         }
 
-        h1 { font-size: 1.8rem; color: #ff4d6d; margin-bottom: 15px; }
-        p { font-size: 1.1rem; line-height: 1.5; color: #d1d1d1; }
-
-        .btn {
-            background: #ff4d6d;
-            border: none;
-            padding: 15px 30px;
-            color: white;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 15px;
-            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
-            display: block;
+        /* NEW: Photo Reveal Styles */
+        #photo-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 5;
+            opacity: 0;
+            transition: opacity 2s ease;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.4) saturate(1.2); /* Darkened so text is readable */
         }
 
+        .show-photo { opacity: 1 !important; }
+
+        /* [Keeping your previous buttons and animations] */
+        .btn { background: linear-gradient(45deg, #ff4d6d, #ff758f); border: none; padding: 16px 30px; color: white; font-size: 1.1rem; font-weight: bold; border-radius: 50px; cursor: pointer; width: 100%; margin-top: 15px; display: block; }
         .secondary-btn { background: #333; }
-        
-        /* The Jumper Button - specifically for Mobile */
-        #no-btn { 
-            position: fixed; /* Changed to fixed so it stays in viewport */
-            width: 120px; 
-            z-index: 9999;
-            transition: all 0.15s ease;
-        }
-
+        #no-btn { position: fixed; width: 100px; z-index: 999; transition: all 0.1s ease; }
         .hidden { display: none !important; }
-
-        .name-reveal {
-            font-size: 3.5rem;
-            font-weight: 900;
-            background: linear-gradient(45deg, #ff4d6d, #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: block;
-            margin: 20px 0;
-            animation: grow 0.8s ease-out forwards;
-        }
-
-        @keyframes grow {
-            0% { transform: scale(0); opacity: 0; }
-            100% { transform: scale(1.1); opacity: 1; }
-        }
-
-        .confetti {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            top: -10px;
-            animation: fall linear forwards;
-            z-index: 1;
-        }
-
+        .name-reveal { font-size: 3.5rem; font-weight: 900; background: linear-gradient(45deg, #ff4d6d, #ffffff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: block; margin: 15px 0; animation: grow 0.8s forwards; }
+        @keyframes grow { 0% { transform: scale(0); } 100% { transform: scale(1.1); } }
+        .confetti { position: absolute; width: 10px; height: 10px; z-index: 100; animation: fall linear forwards; }
         @keyframes fall { to { transform: translateY(110vh) rotate(720deg); } }
+        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
     </style>
 </head>
 <body>
 
+    <div id="photo-container" style="background-image: url('us.jpg');"></div>
+
     <div class="card" id="main-card">
         <div id="stage1">
             <h1>Hey RiT... 🛑</h1>
-            <p>I was working on a small project for my programming lab and needed someone to test it on mobile.</p>
-            <button class="btn" onclick="showStage(2)">Open Project</button>
+            <p>Can you check if this project UI looks okay on your phone?</p>
+            <button class="btn" onclick="showStage(2)">Check it</button>
         </div>
 
         <div id="stage2" class="hidden">
             <h1>💖</h1>
-            <p>Actually, forget the lab. It's Valentine's week... so, will you be my Valentine?</p>
-            <button class="btn" onclick="showStage(3)">Yes, of course! 😍</button>
-            <button class="btn secondary-btn" onclick="showStage(3)">Fine, yes lol</button>
+            <p>Will you be my Valentine?</p>
+            <button class="btn" onclick="showStage(3)">Yes! 😍</button>
+            <button class="btn secondary-btn" onclick="showStage(3)">Yes, why not</button>
         </div>
 
         <div id="stage3" class="hidden">
             <h1>Psych! 😂</h1>
-            <p>Eww, no way! 💀 We’d be a total disaster as a couple. Just imagine the fights over Valorant!</p>
-            <p>Sorry, we definitely can't be Valentines...</p>
+            <p>Arey nahi yaar! 💀 Can you imagine us as a couple? Who would we gossip about? Disastrous!</p>
             <button class="btn" onclick="showStage(4)">Wait, then what? 🤨</button>
         </div>
 
         <div id="stage4" class="hidden">
             <h1>Because...</h1>
-            <p>Valentine's Day is just one day, but being best friends is for life.</p>
+            <p>Valentine's Day is for a week, but roaming Patna and gossiping is for a lifetime.</p>
             <p><strong>RiT, will you be my Best Friend Forever?</strong></p>
-            <button class="btn" onclick="boom()">YES! ❤️</button>
-            <button class="btn secondary-btn" id="no-btn" ontouchstart="moveNo(event)" onclick="moveNo(event)">No</button>
+            <div style="height: 140px; position: relative;">
+                <button class="btn" onclick="boom()">YES! ❤️</button>
+                <button class="btn secondary-btn" id="no-btn" onmouseover="moveNo()" ontouchstart="moveNo()">No</button>
+            </div>
         </div>
 
         <div id="stage5" class="hidden">
             <h1 style="font-size: 2rem;">BOOM! 💥</h1>
             <span class="name-reveal">RiT ❤️</span>
             <p>Access Granted <strong>Permanently.</strong></p>
-            <p>You're officially stuck with me! No refunds, no exchanges. 🎮☕</p>
+            <p>Get ready for more Patna trips and me annoying you forever! ☕🌆</p>
         </div>
     </div>
 
@@ -138,33 +116,27 @@
             document.getElementById('stage' + num).classList.remove('hidden');
         }
 
-        function moveNo(e) {
-            e.preventDefault(); // Prevents clicking the button on mobile
+        function moveNo() {
             const btn = document.getElementById('no-btn');
-            
-            // Calculate safe bounds so it doesn't leave the screen
-            const padding = 20;
-            const maxX = window.innerWidth - btn.offsetWidth - padding;
-            const maxY = window.innerHeight - btn.offsetHeight - padding;
-            
-            const newX = Math.max(padding, Math.random() * maxX);
-            const newY = Math.max(padding, Math.random() * maxY);
-            
+            const padding = 50;
+            const newX = Math.random() * (window.innerWidth - btn.offsetWidth - padding);
+            const newY = Math.random() * (window.innerHeight - btn.offsetHeight - padding);
+            btn.style.position = 'fixed';
             btn.style.left = newX + 'px';
             btn.style.top = newY + 'px';
         }
 
         function boom() {
-            // Hide the elusive No button for the final celebration
             document.getElementById('no-btn').style.display = 'none';
+            document.getElementById('photo-container').classList.add('show-photo'); // REVEALS THE PHOTO
             showStage(5);
             for (let i = 0; i < 100; i++) {
                 const confetti = document.createElement('div');
                 confetti.classList.add('confetti');
                 confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.backgroundColor = ['#ff4d6d', '#ffb3c1', '#fff', '#ffd166'][Math.floor(Math.random() * 4)];
+                confetti.style.top = '-10px';
+                confetti.style.backgroundColor = ['#ff4d6d', '#ffb3c1', '#ffffff', '#ffd166'][Math.floor(Math.random() * 4)];
                 confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                confetti.style.opacity = Math.random();
                 document.body.appendChild(confetti);
             }
         }
